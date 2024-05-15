@@ -1,0 +1,34 @@
+display_name: llama_flow
+package_name: llama-flow
+
+maintainer:
+  name: Sabeerali KP
+  email: sabeeralikp233@gmail.com
+
+priority: optional
+
+section: x11
+
+installed_size: 15700
+
+dependencies:
+  - mpv
+
+essential: false
+
+icon: /media/icfoss/Sabeerali/Quac ChatBot/NOCODE-RAG-Main/no_code_rag_frontend/linux/assets/llama_flow.jpg
+
+postuninstall_scripts:
+  - echo "Sorry to see you go."
+
+keywords:
+  - llama_flow
+  - Llama_Flow
+
+generic_name: llama_flow
+
+categories:
+  - Development
+  - Utility
+
+startup_notify: true

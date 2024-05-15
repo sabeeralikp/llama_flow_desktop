@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+ln -s /usr/share/llama_flow/llama_flow /usr/bin/llama_flow
+chmod +x /usr/bin/llama_flow
+exit 0

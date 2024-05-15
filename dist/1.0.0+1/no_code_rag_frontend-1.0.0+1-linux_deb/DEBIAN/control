@@ -1,0 +1,10 @@
+Maintainer: Sabeerali KP <sabeeralikp233@gmail.com>
+Package: llama-flow
+Version: 1.0.0+1
+Section: x11
+Priority: optional
+Architecture: amd64
+Essential: no
+Installed-Size: 15700
+Description: A new Flutter project.
+Depends: mpv

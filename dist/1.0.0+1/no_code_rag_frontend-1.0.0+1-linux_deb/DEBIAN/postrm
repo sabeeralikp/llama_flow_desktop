@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+rm /usr/bin/llama_flow
+echo "Sorry to see you go."
+exit 0

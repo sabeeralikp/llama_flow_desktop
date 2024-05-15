@@ -1,0 +1,6 @@
+{
+  "appTitle": "no_code_rag_frontend",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
