@@ -141,8 +141,8 @@ class BaseRAGSettings {
       });
       llmProvider = arr0;
     }
-    if (json['llm'] != null) {
-      final v = json['llm'];
+    if (json['huggingface_llm'] != null) {
+      final v = json['huggingface_llm'];
       final arr0 = <String>[];
       v.forEach((v) {
         arr0.add(v.toString());
@@ -226,4 +226,3 @@ class BaseRAGSettings {
     return data;
   }
 }
-

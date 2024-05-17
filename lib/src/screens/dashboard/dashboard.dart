@@ -30,7 +30,9 @@ class _DashboardState extends State<Dashboard> {
 
   getCollectionsAPI() async {
     collections = await getCollections();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   onChatbotTap(ChatBotModel chatBot) async {

@@ -74,8 +74,8 @@ class _BasicRAGState extends State<BasicRAG> {
       log(baseRAGSettings.toJson().toString());
       if (baseRAGSettings.vectorDb != null) {
         _vectorDBTypeItems = [
-          ...baseRAGSettings.vectorDb!
-              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+          ...baseRAGSettings.vectorDb!.map((e) => DropdownMenuItem(
+              value: e, enabled: e == "chromadb", child: Text(e ?? "")))
         ];
       }
       if (baseRAGSettings.vectorDbCollection != null) {
@@ -84,20 +84,23 @@ class _BasicRAGState extends State<BasicRAG> {
       }
       if (baseRAGSettings.embedModelProvider != null) {
         _embedModelProviderItems = [
-          ...baseRAGSettings.embedModelProvider!
-              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+          ...baseRAGSettings.embedModelProvider!.map((e) => DropdownMenuItem(
+              value: e, enabled: e == "huggingface", child: Text(e ?? "")))
         ];
       }
       if (baseRAGSettings.embedModel != null) {
         _embedModelItems = [
-          ...baseRAGSettings.embedModel!
-              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+          ...baseRAGSettings.embedModel!.map((e) => DropdownMenuItem(
+              value: e,
+              child: SizedBox(
+                  width: 300,
+                  child: Text(e ?? "", overflow: TextOverflow.ellipsis))))
         ];
       }
       if (baseRAGSettings.llmProvider != null) {
         _llmProviderItems = [
-          ...baseRAGSettings.llmProvider!
-              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+          ...baseRAGSettings.llmProvider!.map((e) => DropdownMenuItem(
+              value: e, enabled: e == "huggingface", child: Text(e ?? "")))
         ];
       }
       if (baseRAGSettings.llm != null) {
@@ -108,8 +111,10 @@ class _BasicRAGState extends State<BasicRAG> {
       }
       if (baseRAGSettings.chunkingStrategy != null) {
         _chunkingStrategyItems = [
-          ...baseRAGSettings.chunkingStrategy!
-              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+          ...baseRAGSettings.chunkingStrategy!.map((e) => DropdownMenuItem(
+              value: e,
+              enabled: e == "semantic-splitting",
+              child: Text(e ?? "")))
         ];
       }
       if (baseRAGSettings.semanticSplitting != null) {
