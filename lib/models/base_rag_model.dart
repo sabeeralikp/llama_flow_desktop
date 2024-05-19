@@ -90,6 +90,8 @@ class BaseRAGSettings {
   List<String?>? embedModel;
   List<String?>? llmProvider;
   List<String?>? llm;
+  List<String?>? llamaCppLlm;
+  List<String?>? ollamaLlm;
   bool? loadIn_4bit;
   List<String?>? chunkingStrategy;
   BaseRAGSettingsSemanticSplitting? semanticSplitting;
@@ -102,6 +104,8 @@ class BaseRAGSettings {
     this.embedModel,
     this.llmProvider,
     this.llm,
+    this.llamaCppLlm,
+    this.ollamaLlm,
     this.loadIn_4bit,
     this.chunkingStrategy,
     this.semanticSplitting,
@@ -148,6 +152,22 @@ class BaseRAGSettings {
         arr0.add(v.toString());
       });
       llm = arr0;
+    }
+    if (json['llama_cpp'] != null) {
+      final v = json['llama_cpp'];
+      final arr0 = <String>[];
+      v.forEach((v) {
+        arr0.add(v.toString());
+      });
+      llamaCppLlm = arr0;
+    }
+    if (json['ollama'] != null) {
+      final v = json['ollama'];
+      final arr0 = <String>[];
+      v.forEach((v) {
+        arr0.add(v.toString());
+      });
+      ollamaLlm = arr0;
     }
     loadIn_4bit = json['load_in_4bit'];
     if (json['chunking_strategy'] != null) {
@@ -207,6 +227,14 @@ class BaseRAGSettings {
         arr0.add(v);
       }
       data['llm'] = arr0;
+    }
+    if (llamaCppLlm != null) {
+      final v = llamaCppLlm;
+      final arr0 = [];
+      for (var v in v!) {
+        arr0.add(v);
+      }
+      data['llama_cpp'] = arr0;
     }
     data['load_in_4bit'] = loadIn_4bit;
     if (chunkingStrategy != null) {
