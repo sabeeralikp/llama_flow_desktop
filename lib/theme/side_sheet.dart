@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
+import 'package:llama_flow/theme/colors.dart';
 
 /// Displays a Material Design 3 side sheet as a general dialog.
 ///

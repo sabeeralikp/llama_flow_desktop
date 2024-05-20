@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:no_code_rag_frontend/api/basic_rag.dart';
-import 'package:no_code_rag_frontend/models/currrent_rage_setting.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/save_chatbot_dialog.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
+import 'package:llama_flow/api/basic_rag.dart';
+import 'package:llama_flow/models/currrent_rage_setting.dart';
+import 'package:llama_flow/src/screens/basic_rag/save_chatbot_dialog.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/measures.dart';
 
 class ChatBot extends StatefulWidget {
   const ChatBot({super.key});

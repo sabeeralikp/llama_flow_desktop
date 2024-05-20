@@ -2,11 +2,11 @@ import 'dart:developer';
 
 import 'package:cross_file/cross_file.dart';
 import 'package:dio/dio.dart';
-import 'package:no_code_rag_frontend/api/api.dart';
-import 'package:no_code_rag_frontend/models/base_rag_model.dart';
-import 'package:no_code_rag_frontend/models/chatbot.dart';
-import 'package:no_code_rag_frontend/models/currrent_rage_setting.dart';
-import 'package:no_code_rag_frontend/models/vectordb_collection.dart';
+import 'package:llama_flow/api/api.dart';
+import 'package:llama_flow/models/base_rag_model.dart';
+import 'package:llama_flow/models/chatbot.dart';
+import 'package:llama_flow/models/currrent_rage_setting.dart';
+import 'package:llama_flow/models/vectordb_collection.dart';
 
 final dio = Dio(baseOptions);
 

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/basic_rag.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/chatbot.dart';
-import 'package:no_code_rag_frontend/theme/theme.dart';
+import 'package:llama_flow/src/screens/basic_rag/basic_rag.dart';
+import 'package:llama_flow/src/screens/basic_rag/chatbot.dart';
+import 'package:llama_flow/theme/theme.dart';
 
 import 'screens/landing/landing.dart';
 import 'settings/settings_controller.dart';

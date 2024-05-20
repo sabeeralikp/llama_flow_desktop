@@ -1,10 +1,10 @@
-name: no_code_rag_frontend
-description: "A new Flutter project."
+name: llama_flow
+description: "NO Code RAG workflow"
 
 # Prevent accidental publishing to pub.dev.
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ">=3.3.4 <4.0.0"

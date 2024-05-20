@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/basic_rag.dart';
-import 'package:no_code_rag_frontend/src/screens/dashboard/dashboard.dart';
-import 'package:no_code_rag_frontend/src/settings/settings_controller.dart';
-import 'package:no_code_rag_frontend/src/settings/settings_view.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
+import 'package:llama_flow/src/screens/basic_rag/basic_rag.dart';
+import 'package:llama_flow/src/screens/dashboard/dashboard.dart';
+import 'package:llama_flow/src/settings/settings_controller.dart';
+import 'package:llama_flow/src/settings/settings_view.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/measures.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 class Screens extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
-import 'package:no_code_rag_frontend/src/screens/landing/screens.dart';
-import 'package:no_code_rag_frontend/src/settings/settings_controller.dart';
-import 'package:no_code_rag_frontend/theme/sidebarx.dart';
+import 'package:llama_flow/src/screens/landing/screens.dart';
+import 'package:llama_flow/src/settings/settings_controller.dart';
+import 'package:llama_flow/theme/sidebarx.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 class Landing extends StatefulWidget {

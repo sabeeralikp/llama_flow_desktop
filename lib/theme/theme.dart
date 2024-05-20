@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
-import 'package:no_code_rag_frontend/theme/text.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/measures.dart';
+import 'package:llama_flow/theme/text.dart';
 
 ThemeData primaryTheme = ThemeData(
     useMaterial3: true,

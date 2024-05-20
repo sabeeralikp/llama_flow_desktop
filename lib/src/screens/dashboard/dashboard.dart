@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 import 'package:loading_indicator_view_plus/loading_indicator_view_plus.dart';
-import 'package:no_code_rag_frontend/api/basic_rag.dart';
-import 'package:no_code_rag_frontend/models/chatbot.dart';
-import 'package:no_code_rag_frontend/models/vectordb_collection.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/chatbot.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/decoration.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
+import 'package:llama_flow/api/basic_rag.dart';
+import 'package:llama_flow/models/chatbot.dart';
+import 'package:llama_flow/models/vectordb_collection.dart';
+import 'package:llama_flow/src/screens/basic_rag/chatbot.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/decoration.dart';
+import 'package:llama_flow/theme/measures.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({this.changePage, super.key});

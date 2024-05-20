@@ -16,7 +16,7 @@ dependencies:
 
 essential: false
 
-icon: /media/icfoss/Sabeerali/Quac ChatBot/NOCODE-RAG-Main/no_code_rag_frontend/linux/assets/llama_flow.jpg
+icon: linux/assets/llama_flow.jpg
 
 postuninstall_scripts:
   - echo "Sorry to see you go."
