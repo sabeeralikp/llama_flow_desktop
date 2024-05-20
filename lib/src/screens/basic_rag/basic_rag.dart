@@ -5,14 +5,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:loading_indicator_view_plus/loading_indicator_view_plus.dart';
-import 'package:no_code_rag_frontend/api/basic_rag.dart';
-import 'package:no_code_rag_frontend/models/base_rag_model.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/chatbot.dart';
-import 'package:no_code_rag_frontend/src/screens/basic_rag/show_side_sheet.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/decoration.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
-import 'package:no_code_rag_frontend/components/snackbar.dart';
+import 'package:llama_flow/api/basic_rag.dart';
+import 'package:llama_flow/models/base_rag_model.dart';
+import 'package:llama_flow/src/screens/basic_rag/chatbot.dart';
+import 'package:llama_flow/src/screens/basic_rag/show_side_sheet.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/decoration.dart';
+import 'package:llama_flow/theme/measures.dart';
+import 'package:llama_flow/components/snackbar.dart';
 
 class BasicRAG extends StatefulWidget {
   const BasicRAG({
@@ -53,6 +53,8 @@ class _BasicRAGState extends State<BasicRAG> {
 
   List<DropdownMenuItem> _llmProviderItems = [];
   List<DropdownMenuItem> _llmItems = [];
+  List<DropdownMenuItem> _llamaCPPllmItems = [];
+  List<DropdownMenuItem> _ollamallmItems = [];
 
   List<DropdownMenuItem> _chunkingStrategyItems = [];
   final TextEditingController _semanticSplittingBufferSizeController =
@@ -100,12 +102,27 @@ class _BasicRAGState extends State<BasicRAG> {
       if (baseRAGSettings.llmProvider != null) {
         _llmProviderItems = [
           ...baseRAGSettings.llmProvider!.map((e) => DropdownMenuItem(
-              value: e, enabled: e == "huggingface", child: Text(e ?? "")))
+                value: e,
+                // enabled: e == "huggingface",
+                child: Text(e ?? ""),
+              ))
         ];
       }
       if (baseRAGSettings.llm != null) {
         _llmItems = [
           ...baseRAGSettings.llm!
+              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+        ];
+      }
+      if (baseRAGSettings.llamaCppLlm != null) {
+        _llamaCPPllmItems = [
+          ...baseRAGSettings.llamaCppLlm!
+              .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
+        ];
+      }
+      if (baseRAGSettings.ollamaLlm != null) {
+        _ollamallmItems = [
+          ...baseRAGSettings.ollamaLlm!
               .map((e) => DropdownMenuItem(value: e, child: Text(e ?? "")))
         ];
       }
@@ -178,6 +195,8 @@ class _BasicRAGState extends State<BasicRAG> {
         embedModelItems: _embedModelItems,
         llmProviderItems: _llmProviderItems,
         llmItems: _llmItems,
+        llamaCPPllmItems: _llamaCPPllmItems,
+        ollamallmItems: _ollamallmItems,
         chunkingStrategyItems: _chunkingStrategyItems,
         semanticSplittingBufferSizeController:
             _semanticSplittingBufferSizeController,

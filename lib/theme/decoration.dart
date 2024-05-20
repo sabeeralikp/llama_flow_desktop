@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/measures.dart';
 
 BoxDecoration boxDecorBorderRadiusCircular14 =
     BoxDecoration(borderRadius: borderRadiusCircular8);

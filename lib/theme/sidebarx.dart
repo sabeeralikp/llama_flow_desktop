@@ -1,8 +1,8 @@
-import 'package:no_code_rag_frontend/theme/colors.dart';
-import 'package:no_code_rag_frontend/theme/decoration.dart';
-import 'package:no_code_rag_frontend/theme/icons.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
-import 'package:no_code_rag_frontend/theme/styles.dart';
+import 'package:llama_flow/theme/colors.dart';
+import 'package:llama_flow/theme/decoration.dart';
+import 'package:llama_flow/theme/icons.dart';
+import 'package:llama_flow/theme/measures.dart';
+import 'package:llama_flow/theme/styles.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 SidebarXTheme baseSideBarXTheme = SidebarXTheme(

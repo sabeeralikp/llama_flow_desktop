@@ -1,6 +1,6 @@
 {
-    "name": "no_code_rag_frontend",
-    "short_name": "no_code_rag_frontend",
+    "name": "llama_flow",
+    "short_name": "llama_flow",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

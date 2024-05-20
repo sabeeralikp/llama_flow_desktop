@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:no_code_rag_frontend/api/basic_rag.dart';
-import 'package:no_code_rag_frontend/components/snackbar.dart';
-import 'package:no_code_rag_frontend/theme/decoration.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
-import 'package:no_code_rag_frontend/theme/text_field.dart';
+import 'package:llama_flow/api/basic_rag.dart';
+import 'package:llama_flow/components/snackbar.dart';
+import 'package:llama_flow/theme/decoration.dart';
+import 'package:llama_flow/theme/measures.dart';
+import 'package:llama_flow/theme/text_field.dart';
 
 import 'settings_controller.dart';
 

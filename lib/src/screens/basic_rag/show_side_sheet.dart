@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:no_code_rag_frontend/components/snackbar.dart';
-import 'package:no_code_rag_frontend/theme/checkbox.dart';
-import 'package:no_code_rag_frontend/theme/measures.dart';
-import 'package:no_code_rag_frontend/theme/side_sheet.dart';
-import 'package:no_code_rag_frontend/theme/text_field.dart';
-import 'package:no_code_rag_frontend/api/basic_rag.dart';
+import 'package:llama_flow/components/snackbar.dart';
+import 'package:llama_flow/theme/checkbox.dart';
+import 'package:llama_flow/theme/measures.dart';
+import 'package:llama_flow/theme/side_sheet.dart';
+import 'package:llama_flow/theme/text_field.dart';
+import 'package:llama_flow/api/basic_rag.dart';
 
 showSideSheet({
   context,
@@ -15,6 +15,8 @@ showSideSheet({
   required List<DropdownMenuItem> embedModelItems,
   required List<DropdownMenuItem> llmProviderItems,
   required List<DropdownMenuItem> llmItems,
+  required List<DropdownMenuItem> llamaCPPllmItems,
+  required List<DropdownMenuItem> ollamallmItems,
   required List<DropdownMenuItem> chunkingStrategyItems,
   required TextEditingController semanticSplittingBufferSizeController,
   required TextEditingController
@@ -77,14 +79,28 @@ showSideSheet({
                       labelText: 'Provider',
                       value: llmProvider,
                       items: llmProviderItems,
-                      onChanged: (value) =>
-                          setState(() => llmProvider = value.toString())),
+                      onChanged: (value) {
+                        setState(() => llmProvider = value.toString());
+                        llmProvider == 'huggingface'
+                            ? setState(() => llm = llmItems[0].value.toString())
+                            : llmProvider == "llamacpp"
+                                ? setState(() =>
+                                    llm = llamaCPPllmItems[0].value.toString())
+                                : setState(() =>
+                                    llm = ollamallmItems[0].value.toString());
+                      }),
                   sizedBoxH12,
-                  if (llmProvider == 'huggingface') ...[
+                  if (llmProvider == 'huggingface' ||
+                      llmProvider == 'llamacpp' ||
+                      llmProvider == "ollama") ...[
                     OutlineDropDownFormField(
                         labelText: 'Model Name',
                         value: llm,
-                        items: llmItems,
+                        items: llmProvider == "huggingface"
+                            ? llmItems
+                            : llmProvider == "llamacpp"
+                                ? llamaCPPllmItems
+                                : ollamallmItems,
                         onChanged: (value) =>
                             setState(() => llm = value.toString())),
                     sizedBoxH12,
