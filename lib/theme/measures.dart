@@ -40,3 +40,11 @@ SizedBox sizedBoxH16 = const SizedBox(height: 16);
 SizedBox sizedBoxH24 = const SizedBox(height: 24);
 SizedBox sizedBoxH32 = const SizedBox(height: 32);
 SizedBox sizedBoxH48 = const SizedBox(height: 48);
+
+
+SizedBox sizedBoxW4 = const SizedBox(width: 4);
+SizedBox sizedBoxW8 = const SizedBox(width: 8);
+SizedBox sizedBoxW12 = const SizedBox(width: 12);
+SizedBox sizedBoxW16 = const SizedBox(width: 16);
+SizedBox sizedBoxW24 = const SizedBox(width: 24);
+SizedBox sizedBoxW32 = const SizedBox(width: 32);

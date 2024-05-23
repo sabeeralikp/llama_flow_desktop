@@ -188,7 +188,7 @@ class _BasicRAGState extends State<BasicRAG> {
   void initState() {
     super.initState();
     getBasicSettingsAPI();
-    getCurrentRAGSettings();
+    getCurrentSettingsAPI();
   }
 
   void _onDragDone(detail) {
@@ -208,27 +208,26 @@ class _BasicRAGState extends State<BasicRAG> {
   }
 
   void _sideSheetOpener() {
-    if (!noBackend) {
+    if (!noBackend && currentRAGSettings != null) {
       showSideSheet(
-        context: context,
-        setState: setState,
-        vectorDBTypeItems: _vectorDBTypeItems,
-        vectorDBCollectionController: _vectorDBCollectionController,
-        embedModelProviderItems: _embedModelProviderItems,
-        ollamaEmbedModelItems: _ollamaEmbedModelItems,
-        embedModelItems: _embedModelItems,
-        llmProviderItems: _llmProviderItems,
-        llmItems: _llmItems,
-        llamaCPPllmItems: _llamaCPPllmItems,
-        ollamallmItems: _ollamallmItems,
-        chunkingStrategyItems: _chunkingStrategyItems,
-        semanticSplittingBufferSizeController:
-            _semanticSplittingBufferSizeController,
-        semanticSplittingBreakpointPercentileThresholdController:
-            _semanticSplittingBreakpointPercentileThresholdController,
-        retriverTopKController: _retriverTopKController,
-        currentRAGSettings: currentRAGSettings
-      );
+          context: context,
+          setState: setState,
+          vectorDBTypeItems: _vectorDBTypeItems,
+          vectorDBCollectionController: _vectorDBCollectionController,
+          embedModelProviderItems: _embedModelProviderItems,
+          ollamaEmbedModelItems: _ollamaEmbedModelItems,
+          embedModelItems: _embedModelItems,
+          llmProviderItems: _llmProviderItems,
+          llmItems: _llmItems,
+          llamaCPPllmItems: _llamaCPPllmItems,
+          ollamallmItems: _ollamallmItems,
+          chunkingStrategyItems: _chunkingStrategyItems,
+          semanticSplittingBufferSizeController:
+              _semanticSplittingBufferSizeController,
+          semanticSplittingBreakpointPercentileThresholdController:
+              _semanticSplittingBreakpointPercentileThresholdController,
+          retriverTopKController: _retriverTopKController,
+          currentRAGSettings: currentRAGSettings!);
     }
   }
 
@@ -279,16 +278,13 @@ class _BasicRAGState extends State<BasicRAG> {
                 beanRadius: 8,
                 color: colorSecondarySideBarBackground))
         : Scaffold(
-            appBar: AppBar(
-                // leading: const Icon(Icons.account_tree_outlined, size: 32),
-                title: const Text('Basic Workflow'),
-                actions: [
-                  IconButton(
-                      iconSize: 28,
-                      onPressed: _sideSheetOpener,
-                      icon: const Icon(Icons.more_vert_rounded)),
-                  const SizedBox(width: 8)
-                ]),
+            appBar: AppBar(title: const Text('Basic Workflow'), actions: [
+              IconButton(
+                  iconSize: 28,
+                  onPressed: _sideSheetOpener,
+                  icon: const Icon(Icons.more_vert_rounded)),
+              sizedBoxW8
+            ]),
             body: SingleChildScrollView(
                 padding: edgeOnlyT16,
                 child: Column(
@@ -296,17 +292,6 @@ class _BasicRAGState extends State<BasicRAG> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // Row(
-                      //   crossAxisAlignment: CrossAxisAlignment.baseline,
-                      //   textBaseline: TextBaseline.ideographic,
-                      //   children: [
-                      //     const Icon(Icons.upload_file),
-                      //     Text("Upload Files", style: theme.textTheme.titleMedium),
-                      //   ],
-                      // ),
-                      // sizedBoxH4,
-                      // Text('Upload your Documents here',
-                      //     style: theme.textTheme.bodyMedium),
                       DropTarget(
                           onDragDone: _onDragDone,
                           onDragEntered: (details) {},
@@ -330,10 +315,10 @@ class _BasicRAGState extends State<BasicRAG> {
                                     child: const Text('Browse'))
                               ])))),
                       if (_list.isNotEmpty) ...[
-                        const SizedBox(height: 16),
+                        sizedBoxH16,
                         Text('Uploaded Files',
                             style: theme.textTheme.bodyLarge),
-                        const SizedBox(height: 8),
+                        sizedBoxH8,
                         ..._list.map((e) => Padding(
                             padding: edgeOnlyT16,
                             child: ListTile(
@@ -346,7 +331,7 @@ class _BasicRAGState extends State<BasicRAG> {
                                 trailing: IconButton(
                                     icon: const Icon(Icons.delete),
                                     onPressed: () => _removeFile(e))))),
-                        sizedBoxH48,
+                        sizedBoxH48
                       ]
                     ])),
             floatingActionButton: _list.isEmpty

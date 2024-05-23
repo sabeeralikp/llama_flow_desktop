@@ -24,153 +24,144 @@ showSideSheet({
   required TextEditingController
       semanticSplittingBreakpointPercentileThresholdController,
   required TextEditingController retriverTopKController,
-  required CurrentRAGSettings? currentRAGSettings,
+  required CurrentRAGSettings currentRAGSettings,
 }) {
-  String vectorDBType = vectorDBTypeItems[0].value.toString();
-  String embedModelProvider = embedModelProviderItems[0].value.toString();
-  String embedModel = embedModelItems[0].value.toString();
-  String llmProvider = llmProviderItems[0].value.toString();
-  String llm = llmItems[0].value.toString();
-  bool loadIn4Bit = true;
-  String chunkingStrategy = chunkingStrategyItems[0].value.toString();
-
-  if (currentRAGSettings != null) {
-    vectorDBType =
-        currentRAGSettings.vectorDb ?? vectorDBTypeItems[0].value.toString();
-    embedModelProvider = currentRAGSettings.embedModelProvider ??
-        embedModelProviderItems[0].value.toString();
-    embedModel =
-        currentRAGSettings.embedModel ?? embedModelItems[0].value.toString();
-    llmProvider =
-        currentRAGSettings.llmProvider ?? llmProviderItems[0].value.toString();
-    llm = currentRAGSettings.llm ?? llmItems[0].value.toString();
-    loadIn4Bit = currentRAGSettings.loadIn_4bit ?? true;
-    chunkingStrategy = currentRAGSettings.chunkingStrategy ??
-        chunkingStrategyItems[0].value.toString();
-  }
+  String vectorDBType =
+      currentRAGSettings.vectorDb ?? vectorDBTypeItems[0].value.toString();
+  String embedModelProvider = currentRAGSettings.embedModelProvider ??
+      embedModelProviderItems[0].value.toString();
+  String embedModel =
+      currentRAGSettings.embedModel ?? embedModelItems[0].value.toString();
+  String llmProvider =
+      currentRAGSettings.llmProvider ?? llmProviderItems[0].value.toString();
+  String llm = currentRAGSettings.llm ?? llmItems[0].value.toString();
+  bool loadIn4Bit = currentRAGSettings.loadIn_4bit ?? true;
+  String chunkingStrategy = currentRAGSettings.chunkingStrategy ??
+      chunkingStrategyItems[0].value.toString();
 
   return showModalSideSheet(
     context,
     body: StatefulBuilder(
-        builder: (context, setState) => SingleChildScrollView(
-            padding: edgeSymmetricH32,
-            child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('VectorDB'),
-                  sizedBoxH12,
-                  OutlineDropDownFormField(
-                      labelText: 'Type',
-                      value: vectorDBType,
-                      items: vectorDBTypeItems,
-                      onChanged: (value) =>
-                          setState(() => vectorDBType = value.toString())),
-                  if (vectorDBType == 'chromadb') ...[
-                    sizedBoxH12,
-                    OutlinedTextFormField(
-                        labelText: 'Collection Name',
-                        controller: vectorDBCollectionController)
-                  ],
-                  sizedBoxH24,
-                  const Text('Embed Model'),
-                  sizedBoxH12,
-                  OutlineDropDownFormField(
-                      labelText: 'Provider',
-                      value: embedModelProvider,
-                      items: embedModelProviderItems,
-                      onChanged: (value) {
-                        setState(() => embedModelProvider = value.toString());
-                        embedModelProvider == "ollama"
-                            ? setState(() => embedModel =
-                                ollamaEmbedModelItems[0].value.toString())
-                            : setState(() => embedModel =
-                                embedModelItems[0].value.toString());
-                      }),
-                  if (embedModelProvider == 'huggingface' ||
-                      embedModelProvider == "ollama") ...[
-                    sizedBoxH12,
-                    OutlineDropDownFormField(
-                        labelText: 'Model Name',
-                        value: embedModel,
-                        items: embedModelProvider == "huggingface"
-                            ? embedModelItems
-                            : ollamaEmbedModelItems,
-                        onChanged: (value) =>
-                            setState(() => embedModel = value.toString()))
-                  ],
-                  sizedBoxH24,
-                  const Text('LLM'),
-                  sizedBoxH12,
-                  OutlineDropDownFormField(
-                      labelText: 'Provider',
-                      value: llmProvider,
-                      items: llmProviderItems,
-                      onChanged: (value) {
-                        setState(() => llmProvider = value.toString());
-                        llmProvider == 'huggingface'
-                            ? setState(() => llm = llmItems[0].value.toString())
-                            : llmProvider == "llamacpp"
-                                ? setState(() =>
-                                    llm = llamaCPPllmItems[0].value.toString())
-                                : setState(() =>
-                                    llm = ollamallmItems[0].value.toString());
-                      }),
-                  sizedBoxH12,
-                  if (llmProvider == 'huggingface' ||
-                      llmProvider == 'llamacpp' ||
-                      llmProvider == "ollama") ...[
-                    OutlineDropDownFormField(
-                        labelText: 'Model Name',
-                        value: llm,
-                        items: llmProvider == "huggingface"
-                            ? llmItems
-                            : llmProvider == "llamacpp"
-                                ? llamaCPPllmItems
-                                : ollamallmItems,
-                        onChanged: (value) =>
-                            setState(() => llm = value.toString())),
-                    sizedBoxH12,
-                    CheckBoxWithTitle(
-                        title: 'load in 4 bit',
-                        value: loadIn4Bit,
-                        onChanged: (value) =>
-                            setState(() => loadIn4Bit = value ?? true))
-                  ],
-                  sizedBoxH24,
-                  const Text('Chunking Strategy'),
-                  sizedBoxH12,
-                  OutlineDropDownFormField(
-                      labelText: 'Split Type',
-                      value: chunkingStrategy,
-                      items: chunkingStrategyItems,
-                      onChanged: (value) =>
-                          setState(() => chunkingStrategy = value.toString())),
-                  sizedBoxH12,
-                  if (chunkingStrategy == 'semantic-splitting')
-                    Row(mainAxisSize: MainAxisSize.min, children: [
-                      Flexible(
-                        child: OutlinedTextFormField(
-                            labelText: 'Buffer Size',
-                            keyboardType: TextInputType.number,
-                            controller: semanticSplittingBufferSizeController),
-                      ),
-                      const SizedBox(width: 8),
-                      Flexible(
-                          child: OutlinedTextFormField(
-                              labelText: 'Breakpoint Percentile',
-                              keyboardType: TextInputType.number,
-                              controller:
-                                  semanticSplittingBreakpointPercentileThresholdController))
-                    ]),
-                  sizedBoxH24,
-                  const Text('Retriver'),
+      builder: (context, setState) => SingleChildScrollView(
+          padding: edgeSymmetricH32,
+          child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('VectorDB'),
+                sizedBoxH12,
+                OutlineDropDownFormField(
+                    labelText: 'Type',
+                    value: vectorDBType,
+                    items: vectorDBTypeItems,
+                    onChanged: (value) =>
+                        setState(() => vectorDBType = value.toString())),
+                if (vectorDBType == 'chromadb') ...[
                   sizedBoxH12,
                   OutlinedTextFormField(
-                      labelText: 'Top K',
-                      keyboardType: TextInputType.number,
-                      controller: retriverTopKController)
-                ]))),
+                      labelText: 'Collection Name',
+                      controller: vectorDBCollectionController)
+                ],
+                sizedBoxH24,
+                const Text('Embed Model'),
+                sizedBoxH12,
+                OutlineDropDownFormField(
+                    labelText: 'Provider',
+                    value: embedModelProvider,
+                    items: embedModelProviderItems,
+                    onChanged: (value) {
+                      setState(() => embedModelProvider = value.toString());
+                      embedModelProvider == "ollama"
+                          ? setState(() => embedModel =
+                              ollamaEmbedModelItems[0].value.toString())
+                          : setState(() =>
+                              embedModel = embedModelItems[0].value.toString());
+                    }),
+                if (embedModelProvider == 'huggingface' ||
+                    embedModelProvider == "ollama") ...[
+                  sizedBoxH12,
+                  OutlineDropDownFormField(
+                      labelText: 'Model Name',
+                      value: embedModel,
+                      items: embedModelProvider == "huggingface"
+                          ? embedModelItems
+                          : ollamaEmbedModelItems,
+                      onChanged: (value) =>
+                          setState(() => embedModel = value.toString()))
+                ],
+                sizedBoxH24,
+                const Text('LLM'),
+                sizedBoxH12,
+                OutlineDropDownFormField(
+                    labelText: 'Provider',
+                    value: llmProvider,
+                    items: llmProviderItems,
+                    onChanged: (value) {
+                      setState(() => llmProvider = value.toString());
+                      llmProvider == 'huggingface'
+                          ? setState(() => llm = llmItems[0].value.toString())
+                          : llmProvider == "llamacpp"
+                              ? setState(() =>
+                                  llm = llamaCPPllmItems[0].value.toString())
+                              : setState(() =>
+                                  llm = ollamallmItems[0].value.toString());
+                    }),
+                sizedBoxH12,
+                if (llmProvider == 'huggingface' ||
+                    llmProvider == 'llamacpp' ||
+                    llmProvider == "ollama") ...[
+                  OutlineDropDownFormField(
+                      labelText: 'Model Name',
+                      value: llm,
+                      items: llmProvider == "huggingface"
+                          ? llmItems
+                          : llmProvider == "llamacpp"
+                              ? llamaCPPllmItems
+                              : ollamallmItems,
+                      onChanged: (value) =>
+                          setState(() => llm = value.toString())),
+                  sizedBoxH12,
+                  CheckBoxWithTitle(
+                      title: 'load in 4 bit',
+                      value: loadIn4Bit,
+                      onChanged: (value) =>
+                          setState(() => loadIn4Bit = value ?? true))
+                ],
+                sizedBoxH24,
+                const Text('Chunking Strategy'),
+                sizedBoxH12,
+                OutlineDropDownFormField(
+                    labelText: 'Split Type',
+                    value: chunkingStrategy,
+                    items: chunkingStrategyItems,
+                    onChanged: (value) =>
+                        setState(() => chunkingStrategy = value.toString())),
+                sizedBoxH12,
+                if (chunkingStrategy == 'semantic-splitting')
+                  Row(mainAxisSize: MainAxisSize.min, children: [
+                    Flexible(
+                      child: OutlinedTextFormField(
+                          labelText: 'Buffer Size',
+                          keyboardType: TextInputType.number,
+                          controller: semanticSplittingBufferSizeController),
+                    ),
+                    sizedBoxW8,
+                    Flexible(
+                        child: OutlinedTextFormField(
+                            labelText: 'Breakpoint Percentile',
+                            keyboardType: TextInputType.number,
+                            controller:
+                                semanticSplittingBreakpointPercentileThresholdController))
+                  ]),
+                sizedBoxH24,
+                const Text('Retriver'),
+                sizedBoxH12,
+                OutlinedTextFormField(
+                    labelText: 'Top K',
+                    keyboardType: TextInputType.number,
+                    controller: retriverTopKController)
+              ])),
+    ),
     header: 'Basic Workflow Options',
     barrierDismissible: true,
     addBackIconButton: false,

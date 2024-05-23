@@ -25,7 +25,9 @@ class _DashboardState extends State<Dashboard> {
 
   getChatbotsAPI() async {
     chatbots = await getChatbots();
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   getCollectionsAPI() async {
@@ -92,25 +94,27 @@ class _DashboardState extends State<Dashboard> {
                 Text('Chatbots', style: theme.textTheme.bodyLarge),
                 sizedBoxH16,
                 SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
                     child: Row(children: [
-                  ChatBotContainer(
-                    onTap: () => widget.changePage!(1),
-                    theme: theme,
-                    icon: Icons.add_rounded,
-                  ),
-                  ...[
-                    ...chatbots.map((e) => ChatBotContainer(
+                      ChatBotContainer(
+                        onTap: () => widget.changePage!(1),
                         theme: theme,
-                        title: e.name!,
-                        onTap: () => onChatbotTap(e),
-                        icon: TablerIcons.message_chatbot)),
-                    const SizedBox(width: 16)
-                  ]
-                ])),
+                        icon: Icons.add_rounded,
+                      ),
+                      ...[
+                        ...chatbots.map((e) => ChatBotContainer(
+                            theme: theme,
+                            title: e.name!,
+                            onTap: () => onChatbotTap(e),
+                            icon: TablerIcons.message_chatbot)),
+                        const SizedBox(width: 16)
+                      ]
+                    ])),
                 sizedBoxH32,
                 Text('DB Collections', style: theme.textTheme.bodyLarge),
                 sizedBoxH16,
                 SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
                       ...[
