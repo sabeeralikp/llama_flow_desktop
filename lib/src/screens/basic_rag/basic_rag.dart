@@ -4,15 +4,16 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:loading_indicator_view_plus/loading_indicator_view_plus.dart';
 import 'package:llama_flow/api/basic_rag.dart';
+import 'package:llama_flow/components/snackbar.dart';
 import 'package:llama_flow/models/base_rag_model.dart';
+import 'package:llama_flow/models/currrent_rage_setting.dart';
 import 'package:llama_flow/src/screens/basic_rag/chatbot.dart';
 import 'package:llama_flow/src/screens/basic_rag/show_side_sheet.dart';
 import 'package:llama_flow/theme/colors.dart';
 import 'package:llama_flow/theme/decoration.dart';
 import 'package:llama_flow/theme/measures.dart';
-import 'package:llama_flow/components/snackbar.dart';
+import 'package:loading_indicator_view_plus/loading_indicator_view_plus.dart';
 
 class BasicRAG extends StatefulWidget {
   const BasicRAG({
@@ -50,6 +51,7 @@ class _BasicRAGState extends State<BasicRAG> {
 
   List<DropdownMenuItem> _embedModelProviderItems = [];
   List<DropdownMenuItem> _embedModelItems = [];
+  List<DropdownMenuItem> _ollamaEmbedModelItems = [];
 
   List<DropdownMenuItem> _llmProviderItems = [];
   List<DropdownMenuItem> _llmItems = [];
@@ -63,6 +65,7 @@ class _BasicRAGState extends State<BasicRAG> {
       _semanticSplittingBreakpointPercentileThresholdController =
       TextEditingController();
   final TextEditingController _retriverTopKController = TextEditingController();
+  CurrentRAGSettings? currentRAGSettings;
 
   bool noBackend = false;
   showNoBackendSnackBar() {
@@ -87,7 +90,9 @@ class _BasicRAGState extends State<BasicRAG> {
       if (baseRAGSettings.embedModelProvider != null) {
         _embedModelProviderItems = [
           ...baseRAGSettings.embedModelProvider!.map((e) => DropdownMenuItem(
-              value: e, enabled: e == "huggingface", child: Text(e ?? "")))
+              value: e,
+              enabled: e == "huggingface" || e == "ollama",
+              child: Text(e ?? "")))
         ];
       }
       if (baseRAGSettings.embedModel != null) {
@@ -99,6 +104,16 @@ class _BasicRAGState extends State<BasicRAG> {
                   child: Text(e ?? "", overflow: TextOverflow.ellipsis))))
         ];
       }
+      if (baseRAGSettings.ollamaEmbedModel != null) {
+        _ollamaEmbedModelItems = [
+          ...baseRAGSettings.ollamaEmbedModel!.map((e) => DropdownMenuItem(
+              value: e,
+              child: SizedBox(
+                  width: 300,
+                  child: Text(e ?? "", overflow: TextOverflow.ellipsis))))
+        ];
+      }
+
       if (baseRAGSettings.llmProvider != null) {
         _llmProviderItems = [
           ...baseRAGSettings.llmProvider!.map((e) => DropdownMenuItem(
@@ -162,10 +177,18 @@ class _BasicRAGState extends State<BasicRAG> {
     }
   }
 
+  getCurrentSettingsAPI() async {
+    currentRAGSettings = await getCurrentRAGSettings();
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     getBasicSettingsAPI();
+    getCurrentRAGSettings();
   }
 
   void _onDragDone(detail) {
@@ -192,6 +215,7 @@ class _BasicRAGState extends State<BasicRAG> {
         vectorDBTypeItems: _vectorDBTypeItems,
         vectorDBCollectionController: _vectorDBCollectionController,
         embedModelProviderItems: _embedModelProviderItems,
+        ollamaEmbedModelItems: _ollamaEmbedModelItems,
         embedModelItems: _embedModelItems,
         llmProviderItems: _llmProviderItems,
         llmItems: _llmItems,
@@ -203,6 +227,7 @@ class _BasicRAGState extends State<BasicRAG> {
         semanticSplittingBreakpointPercentileThresholdController:
             _semanticSplittingBreakpointPercentileThresholdController,
         retriverTopKController: _retriverTopKController,
+        currentRAGSettings: currentRAGSettings
       );
     }
   }

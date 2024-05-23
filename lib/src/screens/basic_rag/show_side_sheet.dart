@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:llama_flow/components/snackbar.dart';
+import 'package:llama_flow/models/currrent_rage_setting.dart';
 import 'package:llama_flow/theme/checkbox.dart';
 import 'package:llama_flow/theme/measures.dart';
 import 'package:llama_flow/theme/side_sheet.dart';
@@ -13,6 +14,7 @@ showSideSheet({
   required TextEditingController vectorDBCollectionController,
   required List<DropdownMenuItem> embedModelProviderItems,
   required List<DropdownMenuItem> embedModelItems,
+  required List<DropdownMenuItem> ollamaEmbedModelItems,
   required List<DropdownMenuItem> llmProviderItems,
   required List<DropdownMenuItem> llmItems,
   required List<DropdownMenuItem> llamaCPPllmItems,
@@ -22,6 +24,7 @@ showSideSheet({
   required TextEditingController
       semanticSplittingBreakpointPercentileThresholdController,
   required TextEditingController retriverTopKController,
+  required CurrentRAGSettings? currentRAGSettings,
 }) {
   String vectorDBType = vectorDBTypeItems[0].value.toString();
   String embedModelProvider = embedModelProviderItems[0].value.toString();
@@ -30,6 +33,21 @@ showSideSheet({
   String llm = llmItems[0].value.toString();
   bool loadIn4Bit = true;
   String chunkingStrategy = chunkingStrategyItems[0].value.toString();
+
+  if (currentRAGSettings != null) {
+    vectorDBType =
+        currentRAGSettings.vectorDb ?? vectorDBTypeItems[0].value.toString();
+    embedModelProvider = currentRAGSettings.embedModelProvider ??
+        embedModelProviderItems[0].value.toString();
+    embedModel =
+        currentRAGSettings.embedModel ?? embedModelItems[0].value.toString();
+    llmProvider =
+        currentRAGSettings.llmProvider ?? llmProviderItems[0].value.toString();
+    llm = currentRAGSettings.llm ?? llmItems[0].value.toString();
+    loadIn4Bit = currentRAGSettings.loadIn_4bit ?? true;
+    chunkingStrategy = currentRAGSettings.chunkingStrategy ??
+        chunkingStrategyItems[0].value.toString();
+  }
 
   return showModalSideSheet(
     context,
@@ -61,14 +79,23 @@ showSideSheet({
                       labelText: 'Provider',
                       value: embedModelProvider,
                       items: embedModelProviderItems,
-                      onChanged: (value) => setState(
-                          () => embedModelProvider = value.toString())),
-                  if (embedModelProvider == 'huggingface') ...[
+                      onChanged: (value) {
+                        setState(() => embedModelProvider = value.toString());
+                        embedModelProvider == "ollama"
+                            ? setState(() => embedModel =
+                                ollamaEmbedModelItems[0].value.toString())
+                            : setState(() => embedModel =
+                                embedModelItems[0].value.toString());
+                      }),
+                  if (embedModelProvider == 'huggingface' ||
+                      embedModelProvider == "ollama") ...[
                     sizedBoxH12,
                     OutlineDropDownFormField(
                         labelText: 'Model Name',
                         value: embedModel,
-                        items: embedModelItems,
+                        items: embedModelProvider == "huggingface"
+                            ? embedModelItems
+                            : ollamaEmbedModelItems,
                         onChanged: (value) =>
                             setState(() => embedModel = value.toString()))
                   ],

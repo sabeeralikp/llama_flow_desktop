@@ -88,6 +88,7 @@ class BaseRAGSettings {
   String? vectorDbCollection;
   List<String?>? embedModelProvider;
   List<String?>? embedModel;
+  List<String?>? ollamaEmbedModel;
   List<String?>? llmProvider;
   List<String?>? llm;
   List<String?>? llamaCppLlm;
@@ -102,6 +103,7 @@ class BaseRAGSettings {
     this.vectorDbCollection,
     this.embedModelProvider,
     this.embedModel,
+    this.ollamaEmbedModel,
     this.llmProvider,
     this.llm,
     this.llamaCppLlm,
@@ -136,6 +138,14 @@ class BaseRAGSettings {
         arr0.add(v.toString());
       });
       embedModel = arr0;
+    }
+    if (json['ollama_embed_models'] != null) {
+      final v = json['ollama_embed_models'];
+      final arr0 = <String>[];
+      v.forEach((v) {
+        arr0.add(v.toString());
+      });
+      ollamaEmbedModel = arr0;
     }
     if (json['llm_provider'] != null) {
       final v = json['llm_provider'];
